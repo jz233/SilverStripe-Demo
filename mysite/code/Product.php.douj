@@ -1,0 +1,28 @@
+<?php
+
+
+class Product extends DataObject{
+	private static $db = array(
+		'Title' => 'VarChar',
+		'Price' => 'Currency'
+	
+	);
+}
+
+$product = Product::create();
+
+echo $product->ID;	//0
+
+$product->write();	//将此对象插入到数据库，如果该记录已存在，就更新
+echo $product->ID;	//442
+
+echo $product::create()->write();	//443
+
+$product = Product::create(array('Title'=>'My first product'));
+
+$product->delete();
+echo $product->ID;	//0
+
+$product->Price = 2.49;
+$product->write();	
+$product->write();	
